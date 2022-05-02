@@ -64,14 +64,11 @@ jobs:
       - name : Run Sql Generation Tests
         run :
           mvn -pl legend-engine-server -Dtest="Test_Relational_DbSpecific_SqlServer_UsingPureClientTestSuite" test
-      - name : Run All Tests
-        run :
-          mvn test
       - name: Test Report
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
         with:
-          artifact: legend-engine-test-reports           # artifact name
+          artifact: legend-engine-server          # artifact name
           name: JUNIT Tests            # Name of the check run which will be created
-          path: surefire-reports-aggregate/TEST-*.xml    # Path to test results
+          path: surefire-reports/TEST-*.xml    # Path to test results
           reporter: java-junit        # Format of test results
