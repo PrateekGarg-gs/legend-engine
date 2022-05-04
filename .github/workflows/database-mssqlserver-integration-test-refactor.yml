@@ -67,10 +67,17 @@ jobs:
       - name : Run Legend Engine Server Tests
         run :
           mvn -P run-redshift-integration -pl legend-engine-server test
-      - name: Test Report
+      - name: SQL Generation Test Reports
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: JUNIT Tests            # Name of the check run which will be created
           path: 'legend-engine*/target/surefire-reports*/*.xml, legend-engine*/surefire-reports*/*.xml'    # Path to test results
+          reporter: java-junit        # Format of test results
+      - name: All Test Reports
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
+        with:
+          name: JUNIT Tests            # Name of the check run which will be created
+          path: legend-engine-test-reports/surefire-reports-aggregate/*.xml   # Path to test results
           reporter: java-junit        # Format of test results
