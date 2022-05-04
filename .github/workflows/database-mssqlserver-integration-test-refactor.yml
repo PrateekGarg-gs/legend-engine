@@ -68,13 +68,17 @@ jobs:
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: JUNIT Tests            # Name of the check run which will be created
+          name: Test Reports - SQL Generation          # Name of the check run which will be created
           path: 'legend-engine*/target/surefire-reports*/*.xml, legend-engine*/surefire-reports*/*.xml'    # Path to test results
           reporter: java-junit        # Format of test results
+          list-suites: 'all'
+          list-tests: 'all'
       - name: Test Reports - All
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: JUNIT Tests            # Name of the check run which will be created
+          name: Test Reports - All            # Name of the check run which will be created
           path: legend-engine-test-reports/surefire-reports-aggregate/*.xml   # Path to test results
           reporter: java-junit        # Format of test results
+          list-suites: 'all'
+          list-tests: 'all'
