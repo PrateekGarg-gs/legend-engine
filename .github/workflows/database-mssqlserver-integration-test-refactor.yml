@@ -64,9 +64,9 @@ jobs:
       - name : Run Sql Generation Tests
         run :
           mvn -P run-redshift-integration -pl legend-engine-server -Dtest="Test_Relational_DbSpecific_SqlServer_UsingPureClientTestSuite" test
-      - name : Run All Tests
+      - name : Run Legend Engine Server Tests
         run :
-          mvn test
+          mvn -P run-redshift-integration -pl legend-engine-server test
       - name: Test Report
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
